@@ -1,0 +1,294 @@
+mysql> use saii;
+Database changed
+mysql> select *from student;
++------+---------+-------+----------+-----------+--------+
+| sno  | sname   | marks | city     | mobile    | gender |
++------+---------+-------+----------+-----------+--------+
+|    1 | tej     |    45 | wgl      | 912191286 | female |
+|    2 | tejaswi |    40 | wgl      | 912191886 | male   |
+|    3 | suresh  |    42 | wgl      | 912101886 | male   |
+|    4 | shivesh |    22 | hyd      |  91201886 | male   |
+|    5 | hitesh  |    25 | hyd      | 912018886 | female |
+|    6 | john    |    50 | pune     | 912018486 | male   |
+|    7 | lee     |    54 | pune     | 912014486 | female |
+|    8 | venu    |    34 | banglore | 912314486 | male   |
++------+---------+-------+----------+-----------+--------+
+8 rows in set (0.00 sec)
+mysql> insert into student values(9,'rose',67,'banglore',234455677,'male');
+Query OK, 1 row affected (0.00 sec)
+--------------------------------------------------------------
+mysql> insert into student values(10,'jack',67,'pune',234455677,'female');
+Query OK, 1 row affected (0.00 sec)
+------------------------------------------------------------
+mysql> select *from student where city='pune';
++------+-------+-------+------+-----------+--------+
+| sno  | sname | marks | city | mobile    | gender |
++------+-------+-------+------+-----------+--------+
+|    6 | john  |    50 | pune | 912018486 | male   |
+|    7 | lee   |    54 | pune | 912014486 | female |
+|   10 | jack  |    67 | pune | 234455677 | female |
++------+-------+-------+------+-----------+--------+
+3 rows in set (0.00 sec)
+
+---------------------------------------------------------------------
+mysql> select *from student where city='pune'or city='hyd';
++------+---------+-------+------+-----------+--------+
+| sno  | sname   | marks | city | mobile    | gender |
++------+---------+-------+------+-----------+--------+
+|    4 | shivesh |    22 | hyd  |  91201886 | male   |
+|    5 | hitesh  |    25 | hyd  | 912018886 | female |
+|    6 | john    |    50 | pune | 912018486 | male   |
+|    7 | lee     |    54 | pune | 912014486 | female |
+|   10 | jack    |    67 | pune | 234455677 | female |
++------+---------+-------+------+-----------+--------+
+5 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------
+mysql> select *from student where gender='female'and city='hyd'or gender='male' and city='pune'or city='banglore';
++------+--------+-------+----------+-----------+--------+
+| sno  | sname  | marks | city     | mobile    | gender |
++------+--------+-------+----------+-----------+--------+
+|    5 | hitesh |    25 | hyd      | 912018886 | female |
+|    6 | john   |    50 | pune     | 912018486 | male   |
+|    8 | venu   |    34 | banglore | 912314486 | male   |
+|    9 | rose   |    67 | banglore | 234455677 | male   |
++------+--------+-------+----------+-----------+--------+
+4 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------
+
+mysql> select *from student where city='hyd'and gender='male'and marks>70;
+Empty set (0.00 sec)
+
+mysql> select *from student;
++------+---------+-------+----------+-----------+--------+
+| sno  | sname   | marks | city     | mobile    | gender |
++------+---------+-------+----------+-----------+--------+
+|    1 | tej     |    45 | wgl      | 912191286 | female |
+|    2 | tejaswi |    40 | wgl      | 912191886 | male   |
+|    3 | suresh  |    42 | wgl      | 912101886 | male   |
+|    4 | shivesh |    22 | hyd      |  91201886 | male   |
+|    5 | hitesh  |    25 | hyd      | 912018886 | female |
+|    6 | john    |    50 | pune     | 912018486 | male   |
+|    7 | lee     |    54 | pune     | 912014486 | female |
+|    8 | venu    |    34 | banglore | 912314486 | male   |
+|    9 | rose    |    67 | banglore | 234455677 | male   |
+|   10 | jack    |    67 | pune     | 234455677 | female |
++------+---------+-------+----------+-----------+--------+
+10 rows in set (0.00 sec)
+--------------------------------------------------------------------
+mysql> select *from student where city='pune' and gender='male';
++------+-------+-------+------+-----------+--------+
+| sno  | sname | marks | city | mobile    | gender |
++------+-------+-------+------+-----------+--------+
+|    6 | john  |    50 | pune | 912018486 | male   |
++------+-------+-------+------+-----------+--------+
+1 row in set (0.00 sec)
+
+------------------------------------------------------------------
+
+mysql> select *from student where city!='banglore';
++------+---------+-------+------+-----------+--------+
+| sno  | sname   | marks | city | mobile    | gender |
++------+---------+-------+------+-----------+--------+
+|    1 | tej     |    45 | wgl  | 912191286 | female |
+|    2 | tejaswi |    40 | wgl  | 912191886 | male   |
+|    3 | suresh  |    42 | wgl  | 912101886 | male   |
+|    4 | shivesh |    22 | hyd  |  91201886 | male   |
+|    5 | hitesh  |    25 | hyd  | 912018886 | female |
+|    6 | john    |    50 | pune | 912018486 | male   |
+|    7 | lee     |    54 | pune | 912014486 | female |
+|   10 | jack    |    67 | pune | 234455677 | female |
++------+---------+-------+------+-----------+--------+
+8 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------
+
+mysql> select *from student where city='hyd'or city='banglore' and marks between 50 and 80;
++------+---------+-------+----------+-----------+--------+
+| sno  | sname   | marks | city     | mobile    | gender |
++------+---------+-------+----------+-----------+--------+
+|    4 | shivesh |    22 | hyd      |  91201886 | male   |
+|    5 | hitesh  |    25 | hyd      | 912018886 | female |
+|    9 | rose    |    67 | banglore | 234455677 | male   |
++------+---------+-------+----------+-----------+--------+
+3 rows in set (0.00 sec)
+-----------------------------------------------------------------
+
+mysql> select *from student where sname like's%' and sname like '%a';
+Empty set (0.00 sec)
+
+---------------------------------------------------------------
+mysql> select city,count(*) from student group by city;
++----------+----------+
+| city     | count(*) |
++----------+----------+
+| banglore |        2 |
+| hyd      |        2 |
+| pune     |        3 |
+| wgl      |        3 |
++----------+----------+
+4 rows in set (0.00 sec)
+
+==---------------------------------------------------------------
+
+
+mysql> select max(marks),city from student group by city;
++------------+----------+
+| max(marks) | city     |
++------------+----------+
+|         67 | banglore |
+|         25 | hyd      |
+|         67 | pune     |
+|         45 | wgl      |
++------------+----------+
+4 rows in set (0.00 sec)
+
+---------------------------------------------------------------------\
+
+
+mysql> select  *,max(marks) from student where  city='hyd';
++------+---------+-------+------+----------+--------+------------+
+| sno  | sname   | marks | city | mobile   | gender | max(marks) |
++------+---------+-------+------+----------+--------+------------+
+|    4 | shivesh |    22 | hyd  | 91201886 | male   |         25 |
++------+---------+-------+------+----------+--------+------------+
+1 row in set (0.00 sec)
+--------------------------------------------------------------------------------------
+mysql> select city,avg(marks) from student group by city order by avg(marks) desc limit 1;
++------+------------+
+| city | avg(marks) |
++------+------------+
+| pune |         57 |
++------+------------+
+1 row in set (0.00 sec)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+mysql> create table sales(snum int not null,sname varchar(30) not null,city varchar(30) not null,comm decimal(4,2) not null,primary key (snum));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into sales values(1001,'peel','london',0.12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sales values(1002,'serres','san jose',0.13);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sales values(1003,'axel','new york',0.10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sales values(1004,'motika','london',0.11);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sales values(1005,'fran','london',0.26);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sales values(1007,'rif','barcc',0.15);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from sales;
++------+--------+----------+------+
+| snum | sname  | city     | comm |
++------+--------+----------+------+
+| 1001 | peel   | london   | 0.12 |
+| 1002 | serres | san jose | 0.13 |
+| 1003 | axel   | new york | 0.10 |
+| 1004 | motika | london   | 0.11 |
+| 1005 | fran   | london   | 0.26 |
+| 1007 | rif    | barcc    | 0.15 |
++------+--------+----------+------+
+6 rows in set (0.00 sec)
+
+mysql> create table customer(cnum int not null,cname varchar(20) not null,city varchar(20) not null,rate int not null,snum int not null,primary key (cnum),foreign key (snum) references sales(snum));
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into customer values(2001,'hoffmann','london',100,1001);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer values(2002,'giv','rome',200,1003);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer values(2003,'liu','san jose',200,1002);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer values(2004,'grass','berlin',300,1002);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer values(2006,'clemmen','london',100,1001);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer values(2008,'cis','san jose',300,1007);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer values(2007,'per','rome',100,1004);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from customer;
++------+----------+----------+------+------+
+| cnum | cname    | city     | rate | snum |
++------+----------+----------+------+------+
+| 2001 | hoffmann | london   |  100 | 1001 |
+| 2002 | giv      | rome     |  200 | 1003 |
+| 2003 | liu      | san jose |  200 | 1002 |
+| 2004 | grass    | berlin   |  300 | 1002 |
+| 2006 | clemmen  | london   |  100 | 1001 |
+| 2007 | per      | rome     |  100 | 1004 |
+| 2008 | cis      | san jose |  300 | 1007 |
++------+----------+----------+------+------+
+7 rows in set (0.00 sec)
+--------------------------------------------------------------------
+ select snum,count(*) from customer group by  snum;
++------+----------+
+| snum | count(*) |
++------+----------+
+| 1001 |        2 |
+| 1002 |        2 |
+| 1003 |        1 |
+| 1004 |        1 |
+| 1007 |        1 |
++------+----------+
+5 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------------
+
+
+ select snum,avg(rate) from customer group by snum order by avg(rate) desc limit 1;
++------+-----------+
+| snum | avg(rate) |
++------+-----------+
+| 1007 |  300.0000 |
++------+-----------+
+1 row in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------
+
+
+mysql> select *from sales  left join customer on sales.snum=customer.snum where customer.snum is null;
++------+-------+--------+------+------+-------+------+------+------+
+| snum | sname | city   | comm | cnum | cname | city | rate | snum |
++------+-------+--------+------+------+-------+------+------+------+
+| 1005 | fran  | london | 0.26 | NULL | NULL  | NULL | NULL | NULL |
++------+-------+--------+------+------+-------+------+------+------+
+1 row in set (0.00 sec)
+
+-------------------------------------------------------------------------------
+
+mysql> select *from sales  left join customer on sales.snum=customer.snum where rate<200;
++------+--------+--------+------+------+----------+--------+------+------+
+| snum | sname  | city   | comm | cnum | cname    | city   | rate | snum |
++------+--------+--------+------+------+----------+--------+------+------+
+| 1001 | peel   | london | 0.12 | 2001 | hoffmann | london |  100 | 1001 |
+| 1001 | peel   | london | 0.12 | 2006 | clemmen  | london |  100 | 1001 |
+| 1004 | motika | london | 0.11 | 2007 | per      | rome   |  100 | 1004 |
++------+--------+--------+------+------+----------+--------+------+------+
+3 rows in set (0.00 sec)
+
+
+
+mysql> select *from sales  left join customer on sales.snum=customer.snum where sales.city=customer.city;
++------+--------+----------+------+------+----------+----------+------+------+
+| snum | sname  | city     | comm | cnum | cname    | city     | rate | snum |
++------+--------+----------+------+------+----------+----------+------+------+
+| 1001 | peel   | london   | 0.12 | 2001 | hoffmann | london   |  100 | 1001 |
+| 1001 | peel   | london   | 0.12 | 2006 | clemmen  | london   |  100 | 1001 |
+| 1002 | serres | san jose | 0.13 | 2003 | liu      | san jose |  200 | 1002 |
++------+--------+----------+------+------+----------+----------+------+------+
+3 rows in set (0.00 sec)
